@@ -12,6 +12,9 @@ class Post(models.Model):
     def __str__(self):
         return f'[{self.pk}] {self.title}' #해당 포스트의 pk값과 title이 나옴 ex [1]첫번째 포스트
 
+    def get_absolute_url(self):
+        return f'/edu/{self.pk}/'
+
 # class Post(models.Model):
 #     title = models.CharField(max_length=30)
 #     hook_text = models.CharField(max_length=100, blank=True)
