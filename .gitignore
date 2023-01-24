@@ -1,2 +1,4 @@
+# 깃에서 관리하지 않을 대상 목록
 .idea/
 migrations/
+_media/
