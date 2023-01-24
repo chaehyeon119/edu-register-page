@@ -74,7 +74,12 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            {% if p.head_image %}
+                <img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="{{ post.title }} head_image">
+            {% else %}
+                <img class="card-img-top" src="https://picsum.photos/800/200" alt="random image">
+            {% endif %}    
+        
 
         <hr>
 
