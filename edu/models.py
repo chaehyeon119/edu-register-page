@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 
@@ -16,6 +17,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/edu/{self.pk}/'
+    
+    def get_file_name(self): #파일명
+        return os.path.basename(self.file_upload.name)
+
+    def get_file_ext(self): #확장자
+        return self.get_file_name().split('.')[-1]
 
 # class Post(models.Model):
 #     title = models.CharField(max_length=30)
