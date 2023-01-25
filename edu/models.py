@@ -3,6 +3,18 @@ import os
 
 # Create your models here.
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True) # 같은 name의 동일한 카테고리 생성 불가
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return f'/edu/tag/{self.slug}/'
+    
+
+
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True) # 같은 name의 동일한 카테고리 생성 불가
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
@@ -27,6 +39,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return f'[{self.pk}] {self.title}' #해당 포스트의 pk값과 title이 나옴 ex [1]첫번째 포스트
