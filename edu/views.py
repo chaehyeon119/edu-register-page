@@ -8,6 +8,7 @@ from django.utils.text import slugify
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
@@ -111,7 +112,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
-            
+
     def form_valid(self, form):
         response = super(PostUpdate, self).form_valid(form)
         self.object.tags.clear()
