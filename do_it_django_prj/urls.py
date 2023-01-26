@@ -4,9 +4,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+
 urlpatterns = [
     path('edu/', include('edu.urls')),
     path("admin/", admin.site.urls),
+    path('markdownx/', include('markdownx.urls')),
     path('', include('single_pages.urls')),
 ]
 

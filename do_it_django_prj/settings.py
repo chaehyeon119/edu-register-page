@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     "django_extensions",
 
     "crispy_forms",
+    "markdownx",
+    
     "edu",
     "single_pages",
 ]
