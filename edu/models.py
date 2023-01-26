@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import os
 
 # Create your models here.
@@ -32,6 +33,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30)
     hook_text = models.CharField(max_length=100, blank=True)
     content = models.TextField()
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     head_image = models.ImageField(upload_to='edu/images/%Y/%m/%d/', blank=True)
     file_upload = models.FileField(upload_to='edu/files/%Y/%m/%d/', blank=True)
