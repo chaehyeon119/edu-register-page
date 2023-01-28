@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Do It Django</a>
+        <a class="navbar-brand" href="/"><b>ABC-EDU</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,13 +10,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><b>Home</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/edu/">Blog</a>
+                    <a class="nav-link" href="/edu/"><b>Program</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about/">About Me</a>
+                    <a class="nav-link" href="/about/"><b>About</b></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -26,7 +26,7 @@
                             {% if user.socialaccount_set.all.first.get_avatar_url %}
                                 <img class="rounded-circle" width="25px" src="{{ user.socialaccount_set.all.first.get_avatar_url }}" alt="">
                             {% else %}
-                                <img class="rounded-circle" src="https://api.adorable.io/avatars/25/{{ user.username }}.png" alt="">
+                                <img class="rounded-circle" width=25px" src="https://doitdjango.com/avatar/id/1433/7d5d616e1a67d0cd/svg/{self.author.email}" alt="">
                             {% endif %}
                             &nbsp;
                             {{ user.username }}

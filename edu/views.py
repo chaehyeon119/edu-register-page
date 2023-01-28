@@ -105,11 +105,11 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
 
-
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
+            response = super(PostCreate, self).form_valid(form)
 
             tags_str = self.request.POST.get('tags_str')
             if tags_str:
@@ -129,8 +129,9 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return response
 
         else:
-            return redirect('/edu/')
-
+                return redirect('/edu/')
+                
+    
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category']

@@ -3,9 +3,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Do It Django</title>
+    <title>혁신역량교육팀</title>
 
-    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'edu/bootstrap/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/713473f14d.js" crossorigin="anonymous"></script>
 </head>
@@ -17,23 +17,24 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-lg-6 text-light">
-                <h1 class="mt-5">Do It Django</h1>
-                <p>파이썬 진영의 가장 대표적인 웹프레임워크 중 하나인 django를 이용하여 여러분만의 블로그 사이트를 만들어보세요.</p>
+                <h1 class="mt-5">혁신역량교육팀</h1>
+                <h2> Enhance your compentency </h2>
+                <p> 데이터 리터러시 향상 교육 📚 📝</p>
             </div>
 
             <div class="col-lg-5 mt-5">
-                <h2 class="text-light">Blog - Recent posts</h2>
+                <h2 class="text-light">Recent Program</h2>
                 {% for post in recent_posts %}
                     <div class="card mt-1">
                         <div class="card-body">
                             <h6><a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">{{ post.title }}</a></h6>
-                            <span class="badge badge-pill badge-light float-right">
-                                <img class="mr-1 rounded-circle" width="20px" src="{{ post.get_avatar_url }}" alt="{{ post.author }}">
-                                {{ post.author.username }}
-                                &nbsp;
-                                &nbsp;
-                                {{ post.created_at }}
-                           </span>
+                                <span class="badge badge-pill badge-light float-right">
+                                    <img class="mr-1 rounded-circle" width="20px" src="{{ post.get_avatar_url }}" alt="{{ post.author }}">
+                                    {{ post.author.username }}
+                                    &nbsp;
+                                    &nbsp;
+                                    {{ post.created_at }}
+                            </span>
                         </div>
                     </div>
                 {% endfor %}
