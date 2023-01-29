@@ -2,3 +2,5 @@
 .idea/
 migrations/
 _media/
+db.sqlite3
+__pycache__

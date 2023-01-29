@@ -90,30 +90,51 @@ class Comment(models.Model):
 
 
 class Register(models.Model) :
+    class RegisterWayChoices(models.TextChoices):
+        DIRECT = "direct", "직접 방문 가입"
+    
+    class ProExpChoices(models.TextChoices):
+        YES = "y", "유사교육을 수강한 적이 있습니다."
+        NO = "n", "유사교육을 수강한 적이 없습니다."
+
+    class SexChoices(models.TextChoices):
+        FEMAIL = "f", "여성"
+        MAIL = "m", "남성"
+
     # 공통 항목
     id = models.AutoField(primary_key=True)
     register_time = models.DateTimeField(auto_now_add=True) # 신청 제출 일시
     name = models.CharField(max_length=10) 
     birthday = models.CharField(max_length=10)
-    email = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=100)
     city = models.CharField(max_length=100) # 현재 거주지
     school = models.CharField(max_length=200) # 학교
     grade = models.CharField(max_length=50) # 학년
-    register_way = models.CharField(max_length=200) # 신청경로
-    pro_exp = models.CharField(max_length=1, null=True) # 유사교육 수강 여부 yes or no
-    pro_name = models.CharField(max_length=100, null=True) # yes일 경우, 수강 교육명
+    register_way = models.CharField(max_length=20, choices=RegisterWayChoices.choices, verbose_name="신청경로")
+    pro_exp = models.CharField(max_length=1, choices=ProExpChoices.choices, default=ProExpChoices.YES, verbose_name="유사교육 수강 여부")
+    pro_name = models.CharField(max_length=100, blank=True, help_text="유사교육을 수강하신 적이 있다면, 수강교육명을 써주세요.")
     
-    privacy = models.CharField(max_length=1) # 개인정보 동의서 체크 (필수)
-    after_edu_ad = models.CharField(max_length=1, null=True) # 추후, 교육 소식 받는지 여부 (선택)
+    # ex: JuniorRegister.objects.filter(sex=Register.SexChoices.FEMAIL)
+    sex = models.CharField(max_length=1,
+        choices=SexChoices.choices,
+        verbose_name="성별")
+    privacy = models.BooleanField() # 개인정보 동의서 체크 (필수)
+    after_edu_ad = models.BooleanField(default=False) # 추후, 교육 소식 받는지 여부 (선택)
 
+    class Meta:
+        abstract = True
+
+
+class JuniorRegister(Register):
     # 선택항목(주니어)
     parents_phone = models.CharField(max_length=100)
 
+
+class ABCRegister(Register):
     # 선택항목(ABC 부트캠프)
     school_city = models.CharField(max_length=100) # 학교 소재지 서울특별시, 대전특벌시 .... 기타
     recommender = models.CharField(max_length=100 ,null=True) #교육 추천자
     self_intro = models.TextField() # 자기소개
     self_motive = models.TextField()  # 지원동기
     info_noshow = models.CharField(max_length=1) # 노쇼시 불이익 확인 체크 (필수)
-    

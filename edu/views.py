@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
-from .models import Post, Category, Tag, Comment
-from .forms import CommentForm
+from .models import Post, Category, Tag, Comment, Register
+from .forms import CommentForm, RegisterForm
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 from django.db.models import Q
@@ -130,7 +130,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         else:
                 return redirect('/edu/')
-                
+
     
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
@@ -227,3 +227,31 @@ def delete_comment(request, pk):
         return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
+
+
+class PostList(ListView):
+    model = Post
+    ordering = '-pk'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Post.objects.filter(category=None).count()
+        return context
+
+
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             register = form.save()
+#             return redirect('records:detail', register.pk)
+#     else:
+#         form = RegisterForm()
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, '/edu/', context)
