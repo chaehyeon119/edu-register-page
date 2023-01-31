@@ -1,4 +1,4 @@
-from .models import Comment, Register
+from .models import Comment, JuniorRegister, ABCRegister
 from django import forms
 
 class CommentForm(forms.ModelForm):
@@ -6,7 +6,12 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('content', )
 
-class RegisterForm(forms.ModelForm):
+class JuniorRegisterForm(forms.ModelForm):
   class Meta:
-    model = Register
+    model = JuniorRegister
+    fields = '__all__'
+
+class ABCRegisterForm(forms.ModelForm):
+  class Meta:
+    model = ABCRegister
     fields = '__all__'

@@ -3,7 +3,7 @@
 {% block main_area %}
     {% if user.is_authenticated%}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-right" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
+            <a class="btn btn-info btn-sm float-right" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;</a>
         {% endif %}
     {% endif %}
 
@@ -52,7 +52,9 @@
                 </div>
                 {% endfor %}
             {% else %}
-                <p> 아직 게시물이 없습니다. </p>
+                <p>
+                    <h1> 앗! <br>
+                    아직 게시물이 없네요! </h1> </p>
             {% endif %}
             {% if is_paginated %}
 

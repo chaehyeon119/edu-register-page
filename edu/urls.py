@@ -11,6 +11,7 @@ urlpatterns = [
     path('category/<str:slug>/', views.category_page),
     path('<int:pk>/new_comment/', views.new_comment),
     path('<int:pk>/', views.PostDetail.as_view()),
+    path('register/junior/', views.JuniorRegisterList),
     path('', views.PostList.as_view()),
     # path('<int:pk>/register/', views.register.as_view()),
 

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
-from .models import Post, Category, Tag, Comment, Register
-from .forms import CommentForm, RegisterForm
+from .models import Post, Category, Tag, Comment, JuniorRegister, ABCRegister
+from .forms import CommentForm, JuniorRegisterForm, ABCRegisterForm
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 from django.db.models import Q
@@ -240,6 +240,26 @@ class PostList(ListView):
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
+
+def JuniorRegisterList(request):
+
+    if request.method == 'POST':
+        form = JuniorRegisterForm(request.POST)
+        if form.is_valid():
+            junior = form.save(commit=False)
+            junior.save()
+            return redirect('/edu/')
+    else:
+        form = JuniorRegisterForm()
+        context = { 'form' : form }
+        return render(request, 'edu/junior_form.html', context)
+
+
+    # form = JuniorRegisterForm()
+    # return render(request, 'edu/junior_form.html', {'form': form})
+            
+
+
 
 
 
