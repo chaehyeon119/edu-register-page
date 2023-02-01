@@ -3,7 +3,7 @@
 {% block head_title %} 프로그램 생성하기 {% endblock %}
 
 {% block main_area %}
-    <h1>Create New Post</h1>
+    <h1>프로그램 생성하기</h1>
     <hr/>
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form | crispy }}

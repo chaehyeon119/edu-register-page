@@ -32,20 +32,22 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 class Post(models.Model):
-    title = models.CharField(max_length=30)
-    hook_text = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=30, verbose_name="제목")
+    hook_text = models.CharField(max_length=100, blank=True, verbose_name="부제")
 
-    summary = models.CharField(max_length=30)
-    content = MarkdownxField()
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    summary = models.CharField(max_length=30, verbose_name="요약 내용")
+    content = MarkdownxField(verbose_name="내용")
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, verbose_name="작성자")
 
-    head_image = models.ImageField(upload_to='edu/images/%Y/%m/%d/', blank=True)
-    file_upload = models.FileField(upload_to='edu/files/%Y/%m/%d/', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    head_image = models.ImageField(upload_to='edu/images/%Y/%m/%d/', blank=True, verbose_name="대표 이미지")
+    file_upload = models.FileField(upload_to='edu/files/%Y/%m/%d/', blank=True, verbose_name="파일 업로드")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="게시 일자")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="수정 일자")
 
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
-    tags = models.ManyToManyField(Tag, blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="카테고리")
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name="태그")
+
+ 
 
     def __str__(self):
         return f'[{self.pk}] {self.title}' #해당 포스트의 pk값과 title이 나옴 ex [1]첫번째 포스트
