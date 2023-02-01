@@ -34,6 +34,8 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=30)
     hook_text = models.CharField(max_length=100, blank=True)
+
+    summary = models.CharField(max_length=30)
     content = MarkdownxField()
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
@@ -138,8 +140,8 @@ class Register(models.Model) :
             choices=CityChoices.choices,
             verbose_name="현재 거주지") # 현재 거주지
     # ex: JuniorRegister.objects.filter(sex=Register.SexChoices.FEMAIL)
-    privacy = models.BooleanField() # 개인정보 동의서 체크 (필수)
-    after_edu_ad = models.BooleanField(default=False) # 추후, 교육 소식 받는지 여부 (선택)
+    privacy = models.BooleanField(verbose_name="개인정보동의이용") # 개인정보 동의서 체크 (필수)
+    after_edu_ad = models.BooleanField(verbose_name="추후 교육 소식 안내", default=False) # 추후, 교육 소식 받는지 여부 (선택)
 
     class Meta:
         abstract = True

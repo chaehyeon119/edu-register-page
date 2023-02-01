@@ -134,7 +134,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category']
+    fields = ['title', 'summary', 'hook_text', 'content', 'head_image', 'file_upload', 'category']
 
     template_name = 'edu/post_update_form.html'
 

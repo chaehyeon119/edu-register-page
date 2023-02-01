@@ -3,7 +3,7 @@
 {% block main_area %}
     {% if user.is_authenticated%}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-right" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;</a>
+            <a class="btn btn-info btn-sm float-right" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i> 새 글&nbsp;</a>
         {% endif %}
     {% endif %}
 
@@ -34,7 +34,8 @@
                         {% if p.hook_text %}
                             <h5 class="text-muted"> {{ p.hook_text }}</h5>
                         {% endif %}
-                        <p class="card-text">{{ p.get_content_markdown | truncatewords_html:45 | safe }}</p>
+                        <!-- <p class="card-text">{{ p.get_content_markdown | truncatewords_html:45 | safe }}</p> -->
+                        <p class="card-text"> {{ p.summary }} </p>
                         {% if p.tags.exists %}
                             <i class="fas fa-tags"></i>
                             {% for tag in p.tags.iterator %}
@@ -43,10 +44,10 @@
                             <br/>
                             <br/>
                         {% endif %}
-                                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">알아보기 &rarr;</a>
                     </div>
                     <div class="card-footer text-muted">
-                        Posted on {{ p.created_at }}
+                        작성일시 {{ p.created_at }}
                         <a href="#"> {{ p.author | upper }} </a>
                     </div>
                 </div>
