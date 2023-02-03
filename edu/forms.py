@@ -9,7 +9,7 @@ class CommentForm(forms.ModelForm):
 class JuniorRegisterForm(forms.ModelForm):
   class Meta:
     model = JuniorRegister
-    fields = '__all__'
+    fields = ['name', 'birthday', 'phone_number', 'school', 'grade', 'city', 'email', 'pro_exp', 'privacy', 'after_edu_ad']
 
 class ABCRegisterForm(forms.ModelForm):
   class Meta:

@@ -240,6 +240,12 @@ class PostList(ListView):
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
+    
+
+class finish(DetailView):
+    model = Post
+    template_name = 'edu/finish.html'
+
 
 def JuniorRegisterList(request):
 

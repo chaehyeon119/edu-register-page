@@ -5,7 +5,6 @@ from .models import Post, Category, Tag, Comment,JuniorRegister
 
 admin.site.register(Post, MarkdownxModelAdmin)
 admin.site.register(Comment)
-admin.site.register(JuniorRegister)
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
@@ -13,5 +12,10 @@ class CategoryAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}   
 
+class JuniorRegisterAdmin(admin.ModelAdmin):
+    list_display = ['id','sent_day', 'name', 'birthday', 'school', 'sex', 'city', 'email', 'after_edu_ad', 'privacy']
+    search_fields = ['']
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(JuniorRegister, JuniorRegisterAdmin)

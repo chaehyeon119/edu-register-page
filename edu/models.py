@@ -130,20 +130,21 @@ class Register(models.Model) :
     id = models.AutoField(primary_key=True)
     register_time = models.DateTimeField(auto_now_add=True) # 신청 제출 일시
     name = models.CharField(max_length=10, verbose_name="이름") 
-    birthday = models.CharField(max_length=10, verbose_name="생년월일")
+    birthday = models.CharField(max_length=10, verbose_name="생년월일", help_text="예) 030708")
     sex = models.CharField(max_length=1,
         choices=SexChoices.choices,
         verbose_name="성별")
     email = models.EmailField(max_length=100, verbose_name="이메일")
 
-    phone_number = models.CharField(max_length=20, verbose_name="연락처", help_text="010-1234-1234")
+    phone_number = models.CharField(max_length=20, verbose_name="연락처", help_text="예) 010-1234-1234")
 
     city = models.CharField(max_length=10,
             choices=CityChoices.choices,
             verbose_name="현재 거주지") # 현재 거주지
     # ex: JuniorRegister.objects.filter(sex=Register.SexChoices.FEMAIL)
-    privacy = models.BooleanField(verbose_name="개인정보동의이용") # 개인정보 동의서 체크 (필수)
-    after_edu_ad = models.BooleanField(verbose_name="추후 교육 소식 안내", default=False) # 추후, 교육 소식 받는지 여부 (선택)
+    privacy = models.BooleanField(verbose_name="개인정보 및 초상권 사용 동의", default=True, null=False, help_text="[개인정보 및 초상권 사용 동의] 입력해주신 개인정보는 교육 과정을 운영하는 목적으로 이용하며, 참여자 사진/영상 촬영과 수집 및 활용에 동의합니다.") # 개인정보 동의서 체크 (필수)
+    after_edu_ad = models.BooleanField(verbose_name="추후 교육 소식 안내", default=True, help_text="동의 시, 주니어 데이터 분석 교실 및 다양한 데이터 활용 교육 프로그램 개설 소식을 안내드립니다.") # 추후, 교육 소식 받는지 여부 (선택)
+    sent_day = models.DateTimeField(auto_now=True, verbose_name="접수 일자")
 
     class Meta:
         abstract = True
@@ -151,8 +152,9 @@ class Register(models.Model) :
     # 선택항목(주니어)
 class JuniorRegister(Register):
     class GradeChoices(models.TextChoices):
-        THIRD = "ele_third", "초등학교 5학년"
-        FOUTH = "ele_fouth", "초등학교 5학년"
+        THIRD = "ele_third", "초등학교 3학년"
+        FOUTH = "ele_fouth", "초등학교 4학년"
+        FIFTH = "ele_fifth", "초등학교 5학년"
         SIXTH = "ele_sixth", "초등학교 6학년"
         MIDFIRST = "mid_first", "중학교 1학년"
         MIDSECOND = "mid_second", "중학교 2학년"
@@ -162,8 +164,13 @@ class JuniorRegister(Register):
     class ProExpChoices(models.TextChoices):
         YES = "y", "이전에 수강한 적이 있습니다."
         NO = "n", "첫 수강입니다."
+
     school = models.CharField(max_length=200, help_text="OOO초등학교", verbose_name="학교명") # 학교
-    parents_phone = models.CharField(max_length=100), 
+    grade = models.CharField(max_length=10,
+            choices=GradeChoices.choices,
+            verbose_name="학년") # 학년
+
+    parents_phone = models.CharField(max_length=20, verbose_name="부모님 연락처", help_text="예) 010-1234-1234"),
     pro_exp = models.CharField(max_length=1, choices=ProExpChoices.choices, default=ProExpChoices.YES, verbose_name="주니어 수강 경험 여부")
 
     def __str__(self):
