@@ -8,6 +8,7 @@ colorama==0.4.3
 decorator==4.4.2
 defusedxml==0.6.0
 
+Django==3.2.16
 django-allauth==0.42.0
 django-crispy-forms==1.9.2
 django-extensions==3.0.9
@@ -36,3 +37,6 @@ traitlets==5.0.4
 urllib3==1.25.10
 wcwidth==0.2.5
 zipp==3.2.0
+django-admin-adminlte==1.0.3
+pymysql==1.0.2
+django-import-export==3.0.2

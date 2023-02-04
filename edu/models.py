@@ -223,3 +223,41 @@ class ABCRegister(Register):
     self_motive = models.TextField()  # 지원동기
     info_noshow = models.CharField(max_length=1) # 노쇼시 불이익 확인 체크 (필수)
 
+
+#학습조 동아리 주제 접수
+class ClubRegister(models.Model) :
+
+    
+    class TeamChoices(models.TextChoices):
+        EDUCATION = "education", "혁신역량교육팀"
+        PUBLIC = "public", "공공사업그룹"
+        SERVICE = "service", "서비스개발팀"
+        UIUX = "uiux", "UI/UX팀"
+        AI = "ai", "AI사업팀"
+        BUSINESS = "business", "경영관리본부"
+        LAB = "lab", "기업부설연구소"
+
+        
+    # 공통 항목
+    id = models.AutoField(primary_key=True)
+    register_time = models.DateTimeField(auto_now_add=True) # 신청 제출 일시
+    name = models.CharField(max_length=10, verbose_name="이름", help_text="조장명을 적어주세요") 
+    
+    team = models.CharField(max_length=10,
+        choices=TeamChoices.choices,
+        verbose_name="소속")
+    email = models.EmailField(max_length=100, verbose_name="이메일", help_text="그룹웨어 이메일")
+    phone_number = models.CharField(max_length=20, verbose_name="연락처", help_text="예) 010-1234-1234")
+    subject = models.CharField(max_length=30, verbose_name="학습 주제")
+    file_upload = models.FileField(upload_to='edu/files/%Y/%m/%d/', blank=True, verbose_name="파일 업로드")
+
+    def __str__(self):
+        return f'[{self.pk}] {self.subject} {self.name}' #해당 포스트의 pk값과 title이 나옴 ex [1]첫번째 포스트
+
+    def get_absolute_url(self):
+        return f'/edu/{self.pk}/'
+    
+    def get_file_name(self): #파일명
+        return os.path.basename(self.file_upload.name)
+
+

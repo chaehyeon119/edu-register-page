@@ -1,15 +1,16 @@
 {% extends 'edu/base.html' %}
+{% load static %}
 
 {% block main_area %}
     {% if user.is_authenticated%}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-right" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i> 새 글&nbsp;</a>
+            <a class="btn btn-info btn-sm float-right mt-4" href="/edu/create_post/" role="button"><i class="fas fa-pen"></i> 새 글&nbsp;</a>
         {% endif %}
     {% endif %}
 
 
 
-        <h1>모집 프로그램 ✨
+        <h1 class="mt-4">모집 프로그램 ✨
             {% if search_info %}<small class="text-muted"> {{ search_info }}</small> {% endif %}
             {% if category %}<span class="badge badge-secondary"> {{ category }} </span>{% endif %}
             {% if tag %}<span class="badge badge-light"><i class="fas fa-tags"></i> {{ tag }}({{ tag.post_set.count }})</span>{% endif %}
@@ -19,9 +20,9 @@
                 <!-- Blog Post -->
                 <div class="card mb-4" id="post-{{ p.pk }}">
                     {% if p.head_image %}
-                        <img class="card-img-top" src="{{ p.head_image.url }}" style="max-width: 80%; margin: 1em;" alt="{{ p }} head image">
+                        <img class="card-img-top" src="{{ p.head_image.url }}" style="max-width: 60%; margin: 1em;" alt="{{ p }} head image">
                     {% else %}
-                        <img class="card-img-top" src="https://picsum.photos/800/200" alt="random image">
+                        <img class="card-img-top" style = "text-align : center;" src="https://picsum.photos/800/200" alt="random image">
                     {% endif %}    
                     <div class="card-body">
                         {% if p.category %}
@@ -54,8 +55,12 @@
                 {% endfor %}
             {% else %}
                 <p>
-                    <h1> 앗! <br>
-                    아직 게시물이 없네요! </h1> </p>
+                    <h2> 
+                        앗! 🥲 <br>
+                    아직 게시물이 없네요!
+                    <img src="{% static 'edu/images/search.png' %}" style="max-width: 70%;" > <br>
+                   </h2>
+                </p>
             {% endif %}
             {% if is_paginated %}
 

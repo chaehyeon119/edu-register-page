@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "admin_adminlte.apps.AdminAdminlteConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "markdownx",
+    "import_export",
     'django.contrib.sites',
     'allauth',
     'allauth.account',

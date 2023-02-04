@@ -242,9 +242,11 @@ class PostList(ListView):
         return context
     
 
-class finish(DetailView):
-    model = Post
-    template_name = 'edu/finish.html'
+def finish(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post = {'post': post}
+    return render(request, 'edu/finish.html', post)
+
 
 
 def JuniorRegisterList(request):
