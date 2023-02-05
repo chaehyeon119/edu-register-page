@@ -142,7 +142,7 @@ class Register(models.Model) :
             choices=CityChoices.choices,
             verbose_name="현재 거주지") # 현재 거주지
     # ex: JuniorRegister.objects.filter(sex=Register.SexChoices.FEMAIL)
-    privacy = models.BooleanField(verbose_name="개인정보 및 초상권 사용 동의", default=True, null=False, help_text="[개인정보 및 초상권 사용 동의] 입력해주신 개인정보는 교육 과정을 운영하는 목적으로 이용하며, 참여자 사진/영상 촬영과 수집 및 활용에 동의합니다.") # 개인정보 동의서 체크 (필수)
+    privacy = models.BooleanField(verbose_name="개인정보 및 초상권 사용 동의", null=False, help_text="[개인정보 및 초상권 사용 동의] 입력해주신 개인정보는 교육 과정을 운영하는 목적으로 이용하며, 참여자 사진/영상 촬영과 수집 및 활용에 동의합니다.") # 개인정보 동의서 체크 (필수)
     after_edu_ad = models.BooleanField(verbose_name="추후 교육 소식 안내", default=True, help_text="동의 시, 주니어 데이터 분석 교실 및 다양한 데이터 활용 교육 프로그램 개설 소식을 안내드립니다.") # 추후, 교육 소식 받는지 여부 (선택)
     sent_day = models.DateTimeField(auto_now=True, verbose_name="접수 일자")
 

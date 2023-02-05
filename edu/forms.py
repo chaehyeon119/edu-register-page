@@ -1,4 +1,4 @@
-from .models import Comment, JuniorRegister, ABCRegister
+from .models import Comment, JuniorRegister, ABCRegister, ClubRegister
 from django import forms
 
 class CommentForm(forms.ModelForm):
@@ -15,3 +15,9 @@ class ABCRegisterForm(forms.ModelForm):
   class Meta:
     model = ABCRegister
     fields = '__all__'
+
+class ClubRegisterForm(forms.ModelForm):
+  class Meta:
+    model = ClubRegister
+    fields = ['name', 'team', 'email', 'phone_number', 'subject', 'file_upload']
+

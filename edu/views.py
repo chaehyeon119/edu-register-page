@@ -14,7 +14,7 @@ class PostList(ListView):
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data()
+        context = super().get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
@@ -260,7 +260,7 @@ def JuniorRegisterList(request):
     else:
         form = JuniorRegisterForm()
         context = { 'form' : form }
-        return render(request, 'edu/junior_form.html', context)
+    return render(request, 'edu/junior_form.html', context)
 
 
     # form = JuniorRegisterForm()
